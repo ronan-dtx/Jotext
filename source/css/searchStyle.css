@@ -1,0 +1,579 @@
+#searchPage {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background: rgb(255, 255, 255, 0.98);
+    /*backdrop-filter: blur(4px);*/
+    z-index: 99;
+    transition: none;
+    -webkit-transition: none;
+    overflow: overlay;
+    overscroll-behavior: contain;
+}
+
+#searchPage.noScroll{
+    overflow: hidden;
+}
+.dark-mode #searchPage{
+    background: var(--dark-mode-body-bg-color);
+}
+
+#searchPageContent {
+    width: 70%;
+    max-width: 1200px;
+    margin: 40px auto 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#searchLogo {
+    max-width: 95%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    font-weight: 500;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#searchClose {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 24px;
+    margin: auto 0;
+    color: var(--lightGreyColor);
+    text-align: center;
+    font-weight: normal;
+    cursor: pointer;
+    transition: none;
+    -webkit-transition: none;
+
+}
+.dark-mode #searchClose:hover{
+    color: var(--dark-mode-font-color);
+}
+
+#searchClose:hover {
+    color: var(--fontGreyColor2);
+}
+
+#searchTypeTab {
+    background: var(--light-bg-color);
+    padding: 2px;
+    border-radius: 10px;
+    display: flex;
+    margin: 10px 0 0 0;
+}
+.dark-mode #searchTypeTab{
+    background-color: var(--dark-mode-light-border-color);
+}
+
+.searchTab {
+    width: 50%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    color: var(--fontGreyColor);
+    border-radius: 8px;
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+    background-color: var(--light-bg-color);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.dark-mode .searchTab{
+    color: var(--dark-mode-font-color);
+    background: none;
+}
+
+.searchTab:hover {
+    color: var(--font-default-color);
+}
+
+.dark-mode .searchTab:hover{
+    color: var(--dark-mode-font-color);
+}
+
+.searchTabSelected {
+    background-color: var(--body-bg-color);
+    /*font-weight: 500;*/
+    color: var(--font-default-color);
+}
+
+.dark-mode .searchTabSelected{
+    color: var(--dark-mode-font-color);
+    background-color: var(--dark-mode-light-gray-bg-color);
+}
+
+
+#searchKey {
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    font-size: 28px;
+    margin: 100px 0 0 0;
+    background: none;
+}
+
+#searchHistoryTitle {
+    height: 60px;
+    line-height: 60px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#keySearchHistoryTop {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0 0 0;
+}
+
+.deleteSarchHistoryBtns {
+    height: 60px;
+    line-height: 60px;
+    font-size: 14px;
+    color: var(--fontGreyColor2);
+    display: flex;
+    align-items: center;
+}
+.searchHistoryBtn{
+    line-height: 28px;
+    margin: auto 0;
+    cursor: pointer;
+}
+
+.searchHistoryBtn:hover{
+    color: var(--font-default-color);
+}
+
+.dark-mode .deleteSarchHistoryBtns{
+    color: var(--dark-mode-font-color);
+}
+
+.dark-mode .deleteSarchHistoryBtns:hover{
+    color: var(--dark-mode-font-color);
+}
+
+#deleteSarchHistoryBtn {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.dark-mode .searchHistoryBtn:hover{
+    color: var(--dark-mode-font-color);
+}
+
+
+#searchHistoryItems {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.searchHistoryItem,
+.deletingHistoryItem {
+    padding: 0 20px;
+    width: fit-content;
+    max-width: 400px;
+    height: 36px;
+    line-height: 36px;
+    color: var(--fontGreyColor);
+    font-size: 16px;
+    border-radius: 18px;
+    border: none;
+    background-color: var(--light-bg-color);
+    margin: 0 10px 10px 0;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: none;
+    -webkit-transition: none;
+    display: flex;
+    align-items: center;
+}
+.searchHistoryItemText{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: none;
+}
+
+.deletingHistoryItem {
+    padding: 0 15px 0 20px;
+    cursor: text;
+}
+
+.deletingHistoryItem span{
+    background: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dark-mode .searchHistoryItem, .dark-mode .deletingHistoryItem{
+    color: var(--dark-mode-font-color);
+    background-color: var(--dark-mode-light-border-color);
+    border: none;
+}
+
+
+.searchHistoryItem:hover,
+.deletingHistoryItem:hover {
+    color: var(--font-default-color);
+    border-color: var(--mid-grey-color);
+}
+
+.dark-mode .deletingHistoryItem:hover{
+    color: var(--dark-mode-font-color);
+    background-color: var(--dark-mode-light-border-color);
+}
+
+.searchHistoryItem:hover {
+    opacity: 1;
+    color: var(--font-default-color);
+}
+
+.dark-mode .searchHistoryItem:hover{
+    color: var(--dark-mode-font-color);
+    background-color: var(--dark-mode-light-border-color);
+}
+
+.deleteHistoryIcon {
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--disabled-font-color);
+    margin: 0 0 0 12px;
+    border-radius: 11px;
+    cursor: pointer;
+}
+.dark-mode .deleteHistoryIcon{
+    color: var(--dark-mode-font-color);
+    background: none;
+}
+
+.deleteHistoryIcon:hover {
+    color: var(--fontGreyColor2);
+    background-color: var(--light-border-color);
+}
+
+.dark-mode .deleteHistoryIcon:hover{
+    color: var(--dark-mode-font-color);
+    background-color: var(--dark-mode-light-gray-bg-color);
+}
+
+#contentTitleSearch {
+    text-overflow: ellipsis;
+    font-weight: 500;
+    margin: 0 30px 0 0;
+    width: fit-content;
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    padding-left: 10px;
+}
+
+#contentTitleSearch .searchResultTitleKey{
+    /*height: 28px;*/
+    /*line-height: 28px;*/
+    min-width: 40px;
+    max-width: 200px;
+    text-align: center;
+    padding: 0 8px;
+    /*margin: auto 8px;*/
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*border-radius: 4px;*/
+    /*background-color: var(--light-bg-color);*/
+}
+
+#searchResultNum {
+    font-weight: normal;
+    font-size: 13px;
+    color: var(--fontGreyColor2);
+    margin-left: 40px;
+
+}
+.dark-mode #searchResultNum{
+    color: var(--dark-mode-font-color);
+}
+
+.searchResultTextBtn {
+    font-size: 14px;
+    line-height: 50px;
+    margin: 0;
+    color: #666;
+    cursor: pointer;
+    transition: none;
+    -webkit-transition: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.dark-mode .searchResultTextBtn{
+    color: var(--dark-mode-font-color);
+}
+
+.searchResultTextBtn:hover {
+    color: var(--themeColor);
+}
+
+.splitText {
+    font-size: 12px;
+    width: 26px;
+    /*color: var(--disabled-font-color);*/
+    text-align: center;
+    cursor: default;
+    opacity: .5;
+}
+
+.searchKeyHighlight {
+    color: var(--themeColor);
+}
+
+#calendarTopBar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 20px 0;
+    line-height: 30px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+#calendarTitle {
+    font-size: 18px;
+    font-weight: 500;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 8px;
+    padding: 0 10px;
+    margin: 0;
+    overflow-anchor: none;
+    display: flex;
+    justify-content: left;
+    cursor: pointer;
+}
+
+.dark-mode #calendarTitle{
+}
+.calendarTitleTextIcon {
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    background: none;
+    transition: transform 0.3s;
+    -webkit-transition: transform 0.3s;
+}
+
+#calendarTitle.hover .calendarTitleTextIcon{
+    transform: rotate(180deg);
+}
+
+#calendarTitle:hover,
+#calendarTitle.hover {
+    background: var(--light-bg-color);
+}
+
+.dark-mode #calendarTitle:hover,
+.dark-mode #calendarTitle.hover {
+    background: var(--dark-mode-btn-hover-color);
+}
+#calendarBtns {
+    display: flex;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.calendarBtn {
+    font-size: 16px;
+    font-weight: 600;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid var(--light-border-color);
+    border-radius: 2px;
+    margin: 0;
+    padding: 0 8px;
+    cursor: pointer;
+    background: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.dark-mode .calendarBtn{
+    border-color: var(--lightGreyColor);
+}
+
+.calendarBtn:hover{
+    background-color: var(--light-bg-color);
+}
+
+.dark-mode .calendarBtn:hover{
+    /*color: var(--dark-mode-font-color);*/
+    background-color: var(--dark-mode-light-gray-bg-color)
+}
+
+#preMonthBtn {
+    border-radius: 6px 0 0 6px;
+}
+
+#nextMonthBtn {
+    border-radius: 0 6px 6px 0;
+}
+
+#thisMonthBtn {
+    font-weight: normal;
+    font-size: 14px;
+    border-radius: 0;
+    margin: 0 -1px;
+}
+
+#calendarWeekTitle,
+.calendarWeeks {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendarWeek,
+.calendarDay {
+    flex-grow: 1;
+    text-align: center;
+    line-height: 30px;
+}
+
+.calendarDay{
+    flex: 1;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 12px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1.618 / 1;
+    /* 设置宽高比为4:3 */
+    cursor: pointer;
+    position: relative;
+    /* 为伪元素定位 */
+    padding: 8px;
+    /* 根据需要调整内边距 */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.calendarDay.notThisMonth{
+    cursor: default;
+}
+
+.calendarDay.calendarDayToday {
+    color: var(--themeColor);
+}
+
+.calendarDay.nodataDay{
+    font-weight: normal;
+    cursor: default;
+    color: var(--disabled-font-color);
+}
+
+.calendarDay:not(.notThisMonth):hover {
+    background: var(--light-bg-color);
+}
+
+.dark-mode .calendarDay.nodataDay{
+    color: var(--dark-mode-disabled-font-color);
+}
+
+.dark-mode .calendarDay:not(.notThisMonth):hover{
+    background-color: var(--dark-mode-light-gray-bg-color);
+}
+
+.dark-mode .calendarDay.nodataDay:hover{
+    color: var(--disabled-font-color);
+}
+
+.searchMonthSelectPanel{
+    display: flex;
+    height: 212px;
+    width: 160px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.monthSelectOption{
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    /*padding: 0 5px;*/
+    overflow-y: auto;
+}
+
+.monthSelectOption.year{
+    border-right: 1px solid var(--light-border-color);
+}
+
+.dark-mode .monthSelectOption.year{
+    border-right: 1px solid var(--dark-mode-light-border-color);
+}
+
+.monthSelectOptionText{
+    padding: 0 4px;
+}
+
+.monthSelectOptionItem{
+    border-radius: 4px;
+}
+
+.monthSelectOptionItem.selected{
+    color: var(--themeColor);
+    font-weight: 600;
+}
+
+.monthSelectOptionItem:hover{
+    background: var(--light-bg-color);
+}
+
+.dark-mode .monthSelectOptionItem:hover{
+    background: var(--dark-mode-light-gray-bg-color);
+} 
+
+
+
+
+/*
+.nodataDay:hover {
+    color: var(--disabled-font-color);
+}
+*/

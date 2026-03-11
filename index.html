@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" >
+		<meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="color-scheme" content="light dark">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="source/css/iconfont/iconfont.css"/>
+		<!-- <link rel="stylesheet" type="text/css" href="https://at.alicdn.com/t/c/font_3977145_0o42nwrzg0pd.css"/> -->
+		<link rel="icon" href="source/img/ico4.png"  size="32×32" type="image/png">
+		<link rel="stylesheet" href="source/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="source/bootstrap/bootstrap-datetimepicker.4.17.47/css/bootstrap-datetimepicker.min.css"/>
+		<link rel="stylesheet" href="source/css/jquery-ui/jquery-ui.css">
+		<link rel="stylesheet" href="source/css/myRecord.css">
+		<link rel="stylesheet" href="source/css/searchStyle.css"/>
+		<script src="source/js/jquery/jquery.js"></script>
+		<script src="source/js/moment/moment-with-locales.min.js"></script>
+		<script src="source/bootstrap/js/bootstrap.min.js"></script>
+		<script src="source/bootstrap/bootstrap-datetimepicker.4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="source/js/staticConfig.js"></script>
+		<script src="source/js/version.js" id='sysVersionJS'></script>
+		<script src="source/js/tools.js"></script>
+		<script src="source/js/recordDeal.js"></script>
+		<script src="source/js/recordDraggable.js"></script>
+		<script src="source/js/jquery/jquery-ui.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				if(!navigator.onLine){
+					printLog("当前无网络连接");
+				}
+				eventInit();
+			});
+
+			$(window).resize(function(){
+				$("#page_scroll").hide();
+				ifShowToTop();
+				if($(".menuPanel").length > 0){
+					$(".menuPanel").trigger("ajustPositon");
+				}
+			});
+		</script>
+		
+	</head>
+
+	<body>
+		<div id="topNav">
+			<div id="topNavContent">
+				<div id="navTitle">
+					<p class="topNavTitle" id="pageTopTitle"></p>
+				</div>
+				<div id="navMenu">
+					<ul>
+						<li>
+							<a id="addRecordBtn" class="navBtn">
+								<em class="iconfont icon-tianjia2 btnFrontIcon"></em>
+								<em class="navBtnTxt">记录</em>
+							</a>
+						</li>
+						<li>
+							<a id="searchBtn" class="navBtn">
+								<em class="iconfont icon-search btnFrontIcon"></em>
+								<em class="navBtnTxt">搜索</em>
+							</a>
+						</li>
+						<li>
+							<a id="saveRecordBtn" class="navBtn">
+								<em class="iconfont icon-download btnFrontIcon"></em>
+								<em class="navBtnTxt">下载</em>
+								<em class="dotReminder"></em>
+							</a>
+						</li>
+						<li>
+							<a id="reUploadBtn" class="navBtn">
+								<em class="iconfont icon-upload btnFrontIcon"></em>
+								<em class="navBtnTxt">上传</em>
+							</a>
+						</li>
+						<li>
+							<a id="configBtn" class="navBtn">
+								<em class="iconfont icon-setting btnFrontIcon"></em>
+								<em class="navBtnTxt">设置</em>
+							</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="nodataDiv">
+				<i class="iconfont icon-nodata" id="nodataIcon"></i>
+				<div id="nodataInfo">
+					<p>还没有记录任何内容。 <button id="toCreateNewRecord">开始记录</button></p>
+					<P>若有之前下载的txt数据文件可上传后继续记录，<span id="nodataUploadFileBtn">点击上传</span>。</P>
+				</div>
+				<div style="clear:both;"></div>
+		</div>
+
+		<div id="contentAll">
+			<div id="mainContent"></div>
+
+			<div id="page_scroll">
+				<em class="iconfont icon-up-arrow scroll_icon"></em>
+			</div>
+
+			<div id="fileDeal">
+				<input type="file"  accept=".txt" id="txtFileUpload">
+			</div>
+		</div>
+			
+		<!-- 弹窗区 -->
+		<div id="alertBgWin">
+
+			<!-- add/edit day record -window -->
+			<div class="alertWin" id="editRecordWin">
+				<p class="winTitle">
+					<span class="winTitleText" id="editWinTitle">添加记录</span>
+					<em class="iconfont icon-guanbi closeWinIcon"></em>
+				</p>
+				<div class="winMainContent">
+
+					<div class="winContentItem">
+						<p class="winContentTitle">主题</p>
+						<div id="editTheme" class="winContentValue"></div>
+					</div>
+
+					<div class="winContentItem">
+						<p class="winContentTitle">日期</p>
+						<div class="dateSetDiv"  class="winContentValue">
+							<input type="radio" name="editRecordDate" value="2" id="beforeyesterdayRadio" >
+							<input type="radio" name="editRecordDate" value="1" id="yesterdayRadio" >
+							<input type="radio" name="editRecordDate" value="0" id="todayRadio" checked="checked">
+							<input type="radio" name="editRecordDate" value="-1" id="tomorrowRadio">
+							<input type="radio" name="editRecordDate" value="-2" id="otherDayRadio">
+							<label id="labelBfyesterday" for="beforeyesterdayRadio" class="radioLabel">前天</label>
+							<label id="labelYesterday" for="yesterdayRadio" class="radioLabel">昨天</label>
+							<label id="labelToday" for="todayRadio" class="radioLabel radioLabelChecked">今天</label>
+							<label id="labelTomorrow" for="tomorrowRadio" class="radioLabel">明天</label>
+							<label id="labelOtherDay" for="otherDayRadio" class="radioLabel" >
+								<input type="text" id="otherDayInput" >
+								<span id="otherDayText" title="点击选择其它日期">其它</span>
+							</label>
+							
+						</div>
+					</div>
+
+					<div class="winContentItem">
+						<p class="winContentTitle">内容</p>
+						
+					</div>
+					<div class="winContentItem winContentListItem">
+						<div id="editInputList">
+							<div class="editInputDiv">
+								<p class="inputNum">1.</p>
+								<textarea rows="1" class="editRecordInput" name="editRecordInput"></textarea>
+							</div>
+							<div class="editInputDiv">
+								<p class="inputNum">2.</p>
+								<textarea rows="1" class="editRecordInput" name="editRecordInput"></textarea>
+							</div>
+							<div class="editInputDiv">
+								<p class="inputNum">3.</p>
+								<textarea rows="1" class="editRecordInput" name="editRecordInput"></textarea>
+							</div>
+							<div class="editInputDiv">
+								<p class="inputNum">4.</p>
+								<textarea rows="1" class="editRecordInput" name="editRecordInput"></textarea>
+							</div>
+						</div>
+						<div id="addContentBar">
+							<em class="iconfont icon-tianjia3" id="addContentBarIcon"></em>
+							<p id="addContentBarText">增加一项</p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="winActionBtns center">
+					<button id="cancelAddBtn" class="winActionBtnItem action1Btn cancelBtn">取消</button>
+					<button id="saveEditBtn" class="winActionBtnItem mainActionBtn">保存</button>
+				</div>
+			</div>
+
+
+			<!-- 下载确认弹窗 -->
+			<div class="alertWin" id="downloadFileWin">
+				<p class="winTitle">
+					<span class="winTitleText">下载数据文件</span>
+					<!-- <em class="iconfont icon-guanbi closeWinIcon"></em> -->
+				</p>
+
+				<div class="winMainContent">
+					<div class="winContentItem">
+						<div class="winContentTitle">包含主题</div>
+						<div class="winContentValue" id="downloadThemeInfo"></div>
+					</div>
+
+					<div class="winContentItem">
+						<div class="winContentTitle">文件名称</div>
+						<div class="winContentValue" id="downloadFileNameInputDiv">
+							<input type="text" name="fileName" id="downloadFileNameInput" placeholder="请输入文件名称" maxlength="100"  autocomplete="off" />
+							<span id="winItemValue">.txt</span>
+						</div>
+						
+					</div>
+				</div>
+
+				<div class="winActionBtns">
+					<button id="cancelDownloadBtn" class="winActionBtnItem action1Btn cancelBtn">取消</button>
+					<button id="confirmDownloadBtn" class="winActionBtnItem mainActionBtn">立即下载</button>
+				</div>
+
+			</div>
+
+
+			<!-- 重命名/新建主题弹窗 -->
+			<div class="alertWin" id="themeNameEditWin">
+				<p class="winTitle">
+					<span class="winTitleText">主题名称</span>
+					<em class="iconfont icon-guanbi closeWinIcon"></em>
+				</p>
+				<!-- <div class="singleInput noClearIcon"> -->
+				<div class="singleInput">
+					<input type="text" name="themeNameInput" id="themeNameEditInput" placeholder="输入新的主题名称" maxlength="30" autocomplete="off" />
+					<span class="clearInputIcon iconfont icon-guanbi"></span>
+				</div>
+				<div class="winActionBtns">
+					<button id="cancelEditThemeBtn" class="winActionBtnItem action1Btn cancelBtn">取消</button>
+					<button id="confirmEditThemeBtn" class="winActionBtnItem mainActionBtn">确定</button>
+				</div>
+			</div>
+
+			<!-- 错误提示 - 可进一步操作 - 弹窗 -->
+			<div class="alertWin" id="infoWin">
+				<div class="dragBar"><em class="iconfont icon-guanbi closeWinIcon"></em></div>
+				<p class="infoText"></p>
+				<p class="tipText"></p>
+				
+				
+				<div class="winActionBtns">
+					<button id="action1Btn"  class="winActionBtnItem action1Btn"></button>
+					<button id="mainActionBtn"  class="winActionBtnItem mainActionBtn" ></button>
+				</div>
+			</div>
+
+
+			<!-- 错误提示 - 无下一步操作 - 弹窗 -->
+			<div class="alertWin" id="errorWin">
+				<div class="dragBar">
+					<!-- <em class="iconfont icon-guanbi closeWinIcon"></em> -->	
+				</div>
+				<p class="errorText" id="errorErrorInfo"></p>
+				
+				<button id="IKCloseBtn"  class="winActionBtnItem mainActionBtn"></button>
+				
+			</div>
+
+			<!-- 弹窗 ｜ 系统设置 -->
+			<div class="alertWin" id="systemConfigWin">
+				<p class="winTitle">
+					<span class="winTitleText">设置</span>
+					<em class="iconfont icon-guanbi closeWinIcon"></em>
+				</p>
+				
+				<div class="winMainContent">
+					<!-- 颜色模式 -->
+					<div class="winContentItem">
+						<div class="winContentTitle">颜色模式</div>
+						<div class="winContentValue">
+							<select id="sysColorModeSlt">
+								<option value="AUTO" selected>跟随系统</option>
+								<option value="LIGHT">浅色</option>
+								<option value="DARK">深色</option>
+							</select>
+						</div>
+					</div>
+					<!-- 主题色 -->
+					<div class="winContentItem">
+						<div class="winContentTitle">主题色</div>
+						<div class="winContentValue">
+							<div id="sysThemeColorList">
+							</div>
+						</div>
+					</div>
+					<!-- 版本号 -->
+					<div class="winContentItem">
+						<div class="winContentTitle">当前版本</div>
+						<div class="winContentValue" id='sysVersionInfo'>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<!-- 搜索页面 - 全屏弹窗 -->
+		<div id="searchPage">
+			<div id="searchPageContent">
+				<div id="searchTop">
+				<div id="searchLogo">My Records</div>
+				<em  id="searchClose" class="iconfont icon-guanbi"></em>
+				</div>
+				<div id="searchTypeTab">
+					<p id="keySearchBtn" class="searchTab searchTabSelected">内容搜索</p>
+					<p id="dateSearchBtn" class="searchTab">日期搜索</p>
+				</div>
+
+				<div id="keySearchContent">
+					<input type="text" id="searchKey" placeholder="输入关键词" maxlength="10" autocomplete="off"/>
+						<div id="keySearchHistory">
+							<div id="keySearchHistoryTop">
+							<div id="searchHistoryTitle">最近搜索</div>
+							<div class="deleteSarchHistoryBtns hidden" id="startDeleteHistoryBtn">
+								<!-- <em id="deleteSarchHistoryBtn" class="searchHistoryBtn iconfont icon-delete"></em> -->
+								<p id="deleteSarchHistoryBtn" class="searchHistoryBtn">删除</p>
+							</div>
+							<div class="deleteSarchHistoryBtns hidden" id="deletingHistoryBtns">
+								<p id="deleteAllHistoryBtn" class="searchHistoryBtn">全部删除</p>
+								<span class="splitText" >|</span>
+								<p id="doneDeleteHistoryBtn" class="searchHistoryBtn">完成</p>
+							</div>
+						</div>
+						<div id="searchHistoryItems"></div>
+					</div>
+					
+				</div>
+
+				<div id="dateSearchContent" style="display: none;">
+					<div id="calendarTopBar">
+						<div id="calendarTitle">
+							<p id="calendarTitleText"></p>
+							<span class="iconfont icon-to-down calendarTitleTextIcon"></span> 
+						</div>
+						<div id="calendarBtns">
+							<div id="preMonthBtn" class="calendarBtn iconfont icon-left"></div>
+							<div id="thisMonthBtn" class="calendarBtn">本月</div>
+							<div id="nextMonthBtn" class="calendarBtn iconfont icon-right"></div>
+						</div>
+					</div>
+					
+					<div id="fullCalendar">
+						<div id="calendarWeekTitle">
+							<div class="calendarWeek">周一</div>
+							<div class="calendarWeek">周二</div>
+							<div class="calendarWeek">周三</div>
+							<div class="calendarWeek">周四</div>
+							<div class="calendarWeek">周五</div>
+							<div class="calendarWeek">周六</div>
+							<div class="calendarWeek">周日</div>
+						</div>
+						<div id="calendarDays">
+						</div>
+					</div>
+				</div>
+			</div>
+	
+		</div>
+
+
+	</body>
+</html>
