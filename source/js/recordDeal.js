@@ -364,9 +364,6 @@ function importRecord(data,themeId){
 
     let afterImportLocalData = copyJson(localRecordData);
 
-    //导入的主题总数量
-    let importThemeNum = getJsonLength(afterImportLocalData.recordData);
-
     
     if(!notNull(localRecordData) || !notNull(localRecordData.recordData) || getJsonLength(localRecordData.recordData)==0){
         if(notNull(themeId)){
@@ -479,7 +476,8 @@ function importRecord(data,themeId){
         //showToast("已成功向「"+aimThemeName+"」导入 "+getJsonLength(afterImportLocalData.recordData[themeId].recordList) + " 条记录、"+ serHisLength +" 条搜索记录",5000);
     }else{
         
-        
+        //导入的主题总数量
+        let importThemeNum = getJsonLength(afterImportLocalData.recordData);
         toastInfo = "已成功导入 "+importThemeNum+" 个主题：共 ";
 
         //导入的记录总数量
@@ -494,7 +492,7 @@ function importRecord(data,themeId){
 
         if(importSearHistoryNum > 0){
             
-            toastInfo += importRecordNum + " 条记录，含" + importSearHistoryNum +" 条搜索记录。";
+            toastInfo += importRecordNum + " 条记录，含 " + importSearHistoryNum +" 条搜索记录。";
             
         }else{
 
