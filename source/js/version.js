@@ -1,10 +1,17 @@
 window.versionInfo = {
-	latest_version: "v8.0(2603101704)",
+	latest_version: "v8.0(2603111709)",
 	update_info: [
-					"体验优化：在指定主题下导入数据时，如果上传文件中有多个主题数据，先弹窗提醒其他主题不会变化，确认后再执行导入操作",
-					"代码优化：showTip的action和main_action处理有多个if else改为switch case"
+					"修复首次导入数据报错‘解析失败’问题",
+					"重新整理上传gitbug项目中的文件"
 				 ],
 	history:{
+		2603101704:{
+			version: "v8.0(2603101704)",
+			update_info:[
+						"体验优化：在指定主题下导入数据时，如果上传文件中有多个主题数据，先弹窗提醒其他主题不会变化，确认后再执行导入操作",
+					"代码优化：showTip的action和main_action处理有多个if else改为switch case"
+						]
+		},
 		2603061622:{
 			version: "v8.0(2603061622)",
 			update_info:[
