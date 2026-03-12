@@ -1713,12 +1713,13 @@ min-height: 250px;
 
 #themeListTitle .themeListBackBtn{
     font-size: 18px;
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 20px;
     text-align: center;
-    margin: 12px 4px 12px 0;
-    border-radius: 13px;
+    margin: 10px 4px 10px 0;
+    border-radius: 16px;
     cursor: pointer;
 }
 
