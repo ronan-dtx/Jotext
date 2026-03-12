@@ -1,7 +1,7 @@
 window.versionInfo = {
 	latest_version: "v8.0(26031121653)",
 	update_info: [
-					""
+					"样式优化：优化主题列表页标题左侧的返回按钮的大小"
 				 ],
 	history:{
 		2603111709:{
