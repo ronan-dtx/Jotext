@@ -1032,7 +1032,7 @@ function createNewRecord(){
 function addAddInput(){
     let crtInputNum = $("[class='editRecordInput']").length;
     let newNum = crtInputNum + 1;
-    if(crtInputNum < 20){
+    if(crtInputNum < RECORD_CONTENT_MAX_NUM){
         let inputHtml = "<div class='editInputDiv newAdd'><p class='inputNum'>"+newNum+".</p><textarea  rows='1' class='editRecordInput' name='editRecordInput'></textarea></div>";
         $("#editInputList").append(inputHtml);
         //<div class="editInputDiv"><p class="inputNum">3.</p><input type="text"  class="editRecordInput"></div>
@@ -1043,8 +1043,8 @@ function addAddInput(){
         
         textareaHeightAutoInput();
 
-        if(newNum == 20){
-            showToast("每条记录最多可添加 20 项内容",3000);
+        if(newNum == RECORD_CONTENT_MAX_NUM){
+            showToast("每条记录最多可添加 " +RECORD_CONTENT_MAX_NUM+ " 项内容",3000);
             $("#addContentBar").hide();
         }
 

@@ -1,9 +1,15 @@
 window.versionInfo = {
-	latest_version: "v8.0(26031121653)",
+	latest_version: "v8.0(2603201559)",
 	update_info: [
-					"样式优化：优化主题列表页标题左侧的返回按钮的大小"
+					"单条记录最大内容数量调整为99"
 				 ],
 	history:{
+		26031121653:{
+			version: "v8.0(26031121653)",
+			update_info:[
+						"样式优化：优化主题列表页标题左侧的返回按钮的大小"
+						]
+		},
 		2603111709:{
 			version: "v8.0(2603111709)",
 			update_info:[
