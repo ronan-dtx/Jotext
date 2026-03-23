@@ -1,9 +1,15 @@
 window.versionInfo = {
-	latest_version: "v8.0(2603201559)",
+	latest_version: "v8.0(2603231804)",
 	update_info: [
-					"单条记录最大内容数量调整为99"
+					"样式优化：链接在末尾时，鼠标移入后正常断行展示；不会因为整体断行后触发自动收起展开频繁跳动"
 				 ],
 	history:{
+		2603201559:{
+			version: "v8.0(2603201559)",
+			update_info:[
+						"单条记录最大内容数量调整为99"
+						]
+		},
 		26031121653:{
 			version: "v8.0(26031121653)",
 			update_info:[
