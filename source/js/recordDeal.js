@@ -3517,18 +3517,20 @@ function copyLinkPop(e,showFlag,linkBox){
             //printLog("mouse over popup");
             clearTimeout(removeCopyPop);
             let link = $(this).siblings(".recordContentLink");
-            link.css("color","var(--themeColor)");
+            link.addClass("hover");
         });
         $(copyLinkPop).mouseout(function(){
             //printLog("mouse out popup");
             // removeCopyPop = setTimeout(function(){copyLinkPop.remove();printLog("popup removed");},200);
             let link = $(this).siblings(".recordContentLink");
-            link.removeAttr("style");
+            link.removeClass("hover");
             copyLinkPop.remove();
         });
         $(copyLinkPop).off("click").on("click",function(e){
+            let link = $(this).siblings(".recordContentLink");
             let linkValue = $(this).siblings(".recordContentLink").attr("href");
             copyText(linkValue);
+            link.removeClass("hover");
             copyLinkPop.remove();
         });
         // if($("body").hasClass("dark-mode")){
@@ -4400,7 +4402,7 @@ function showThemeList(displayRule,fromThemeId){
 
             //最底部的提示文案
             if(index+1 == themeArray.length){
-                showThemeHTML += "<p class='themeListBtm'>  已创建<span class='boldNumber'>"+ themeArray.length.toLocaleString() +"</span>个主题，包含<span class='boldNumber'>"+ recordTotalRcd.toLocaleString() +"</span>条记录，共计<span class='boldNumber'>"+ recordTotalText.toLocaleString() +"</span>字。</p></div>";
+                showThemeHTML += "<p class='themeListBtm'>  已创建<span class='boldNumber'> "+ themeArray.length.toLocaleString() +" </span>个主题，包含<span class='boldNumber'> "+ recordTotalRcd.toLocaleString() +" </span>条记录，共计<span class='boldNumber'> "+ recordTotalText.toLocaleString() +" </span>字。</p></div>";
                 showThemeHTML += "</div>";
             }
 

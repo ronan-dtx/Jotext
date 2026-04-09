@@ -1758,6 +1758,9 @@ function showTip(e, i, action, main_action, actionParams) {
                 //把页面展示的记录操作按钮文案去除
                 pgsRecordHTML = pgsRecordHTML.replace(/<div[^>]*recordActionArea[^>]*>.*?<\/div>/gi, '');
 
+                //把页面展示的复制链接按钮去除
+                pgsRecordHTML = pgsRecordHTML.replace(/<div[^>]*copyLinkPop[^>]*>.*?<\/div>/gi, '');
+
                 //页面展示记录的文字信息
                 let pgsRecordText = pgsRecordHTML.replace(/<[^>]*>/g, '');
 

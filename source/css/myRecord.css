@@ -1308,7 +1308,7 @@ min-height: 250px;
     text-decoration-style: dashed;
 }
 
-.recordContentLink:hover {
+.recordContentLink:hover, .recordContentLink.hover{
     color: var(--themeColor);
     text-decoration: underline;
     text-decoration-style: dashed;
@@ -2139,7 +2139,7 @@ min-height: 250px;
 
 .boldNumber{
     font-weight: 500;
-    padding: 0 5px;
+    /*padding: 0 5px;*/
 }
 
 #newRersionReminder{
