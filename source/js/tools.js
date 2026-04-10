@@ -1369,7 +1369,7 @@ function showTip(e, i, action, main_action, actionParams) {
         if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(event) {
                 printLog("listenSystemColorMode", "监测到系统颜色模式变化");
-                initdarkMode();
+                initDarkMode();
             });
             printLog("listenSystemColorMode", "系统颜色模式监听添加成功");
         } else {
