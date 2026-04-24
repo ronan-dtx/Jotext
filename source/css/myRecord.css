@@ -730,7 +730,7 @@ background: var(--light-bg-color);
     min-height: 200px;
     position: absolute;
     border-radius: 12px;
-    border: 1px solid var(--greyBorder);
+    border: 1px solid var(--light-border-color);
     top: 50%;
     left: 50%;
     background-color: var(--body-bg-color);
