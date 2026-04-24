@@ -31,6 +31,7 @@
     --dark-mode-list-item-hover-color: rgba(255, 255, 255, 0.1);
     --dark-mode-list-item-action-color: rgba(255, 255, 255, 0.2);
     --dark-mode-menu-panel-bg-color: #303030;
+    --dark-mode-win-border-color: #323232;
     --white10: rgba(255,255,255,.1);
     --white20: rgba(255,255,255,.2);
     --white30: rgba(255,255,255,.3);
@@ -696,7 +697,9 @@ background: var(--light-bg-color);
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, .3);
+    background: rgba(0, 0, 0, .05);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
     z-index: 999;
 }
 
@@ -726,7 +729,8 @@ background: var(--light-bg-color);
     max-height: 85vh;
     min-height: 200px;
     position: absolute;
-    border-radius: 5px;
+    border-radius: 12px;
+    border: 1px solid var(--greyBorder);
     top: 50%;
     left: 50%;
     background-color: var(--body-bg-color);
@@ -737,6 +741,7 @@ background: var(--light-bg-color);
 
 .dark-mode .alertWin{
     background-color: var(--dark-mode-light-bg-color);
+    border-color: var(--dark-mode-win-border-color);
 }
 
 .winTitle {
